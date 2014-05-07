@@ -1,0 +1,128 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link type="text/css" rel="stylesheet" href="http://rvaviewer-test.appspot.com/style/viewer.css">
+
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/globals.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/base.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/string.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/urlparams.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/config.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/auth.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/auth-init.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/json-native.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/io.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/onload.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/prefs.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/log.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/wpm.transport.js"></script> -->
+<!-- <script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/rpc.js"></script> -->
+
+<script src='http://rvaviewer-test.appspot.com/gadgets/gadgets.min.js'></script>
+<!-- <script	src='http://rvaviewer-test.appspot.com/scripts/presentationScripts.js'></script> -->
+<script src='presentationScripts.js'></script>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+	<div id="ph1"
+		style="width: 522px; height: 228px; left: 0px; top: 0px; z-index: 1; position: absolute;">
+		<!-- 		<div id="sc0_pre0_ph1" name="sc0_pre0_ph1" -->
+		<!-- 			style="width: 100%; height: 100%; overflow: hidden; position: relative;"> -->
+		<!-- 			<div id="sc0_pre0_ph1_0w" name="sc0_pre0_Right_Main_0w" -->
+		<!-- 				class="none none_show" -->
+		<!-- 				style="width: 100%; height: 100%; overflow: hidden; position: absolute; left: 0px; top: 0px;"> -->
+		<!-- 								<iframe id="if_sc0_pre0_Right_Main_0w" name="if_sc0_pre0_Right_Main_0w" allowtransparency="true" frameborder="0" scrolling="no" -->
+		<!-- 									src="https://s3.amazonaws.com/Widget-Weather-Test/current-and-three-day.html?up_layout=current-and-three-day&amp;up_address=custom&amp;up_custom-address=Havana, Cuba&amp;up_description=service&amp;up_language=en&amp;up_unit=celsius&amp;up_wind-speed=kph&amp;up_background-color=&amp;up_show-humidity=true&amp;up_terms=true&amp;up_id=sc0_pre0_Right_Main_0w&amp;parent=http%3A%2F%2Fviewer-test.appspot.com%2FViewer.html%3Ftype%3Dpresentation%26id%3Dd441dcff-a7a5-4c53-9086-d276ec0a16b4&amp;up_rsW=522&amp;up_rsH=228" -->
+		<!-- 									style="width: 100%; height: 100%;"></iframe> -->
+		<!-- 			</div> -->
+		<!-- 		</div> -->
+	</div>
+
+	<script>
+		try {
+			setVisible('ph1', false);
+		} catch (err) {
+			console.log('setVisible call - ph1 - ' + err.message);
+		}
+	</script>
+	<script>
+		try {
+			updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
+		} catch (err) {
+			console.log('updateGadgetWrapper call - sc0_pre0_ph1 - '
+					+ err.message);
+		}
+	</script>
+	<script>
+		try {
+			updateWidget(
+					'https://s3.amazonaws.com/Widget-Weather-Test/current-and-three-day.html?up_layout=current-and-three-day&up_address=custom&up_custom-address=Havana, Cuba&up_description=service&up_language=en&up_unit=celsius&up_wind-speed=kph&up_background-color=&up_show-humidity=true&up_terms=true&up_id=sc0_pre0_ph1_0w&up_rsW=522&up_rsH=228'
+							+ '&parent=http://localhost:8888/',
+					'sc0_pre0_ph1', 'sc0_pre0_ph1_0w', 'none');
+		} catch (err) {
+			console.log('updateWidget call - sc0_pre0_ph1 - '	+ err.message);
+		}
+	</script>
+
+	<script>
+		function itemLoaded(id) {
+			try {
+				console.log("Item ID=" + id + " is loaded.");
+	
+				$(document).stopTime("t" + id);
+				
+				triggerEvent("gadgetLoaded", id);
+			}
+		    catch (err) {
+		    	console.log("Item " + id + " - rscmd_loaded - " + err.message);
+		    }
+		}
+	
+		function itemReady(id, canPlay, canStop, canPause, canReportReady, canReportDone) {
+			$(document).stopTime("t" + id);
+	
+		    triggerEvent("gadgetReady", id);
+
+		    playCmd(id);
+		}
+	
+		function itemError(id, reason) {
+	    	console.log("Item " + id + " - threw an error - " + reson);
+		}
+	
+		function itemDone(id) {
+		    triggerEvent("gadgetDone", id);
+		    
+		    playCmd(id);
+		}		
+		
+		function getParam(param, source) {
+			console.log("getParam:" + param + " source:" + source);
+			
+			if (param == "additionalParams") {
+				return "{\"layout-url\":\"\",\"custom-description\":\"\",\"current-temp-font\":\"Verdana\",\"current-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"current-temp-font-url\":\"\",\"current-temp-font-size\":\"60\",\"current-temp-bold\":true,\"current-temp-italic\":false,\"current-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-temp-font\":\"Verdana\",\"forecast-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-temp-font-url\":\"\",\"forecast-temp-font-size\":\"20\",\"forecast-temp-bold\":false,\"forecast-temp-italic\":false,\"forecast-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-day-font\":\"Verdana\",\"forecast-day-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-day-font-url\":\"\",\"forecast-day-font-size\":\"20\",\"forecast-day-bold\":true,\"forecast-day-italic\":false,\"forecast-day-color\":\"rgba(0, 0, 0, 1)\",\"address-font\":\"Verdana\",\"address-font-style\":\"Verdana, Geneva, sans-serif\",\"address-font-url\":\"\",\"address-font-size\":\"24\",\"address-bold\":true,\"address-italic\":false,\"address-color\":\"rgba(0, 0, 0, 1)\",\"humidity-font\":\"Verdana\",\"humidity-font-style\":\"Verdana, Geneva, sans-serif\",\"humidity-font-url\":\"\",\"humidity-font-size\":\"20\",\"humidity-bold\":false,\"humidity-italic\":false,\"humidity-color\":\"rgba(0, 0, 0, 1)\"}";
+			}
+			
+			return "";
+		}
+		
+		gadgets.rpc.register('rsmakeRequest_get', function(id, callbackName, url, optParams) {
+			console.log(url);
+// 			url = "weather.xml";
+			
+			gadgets.io.makeRequest(url, function(data) {
+				data['data'] = null;
+				
+				gadgets.rpc.call('if_' + id, callbackName, null, data);				
+			}, optParams);
+		});
+	</script>
+</body>
+
+</html>
