@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="preview">
+<head>
+  <script type="text/javascript" src="components/angular/angular.js"></script>
+  <script type="text/javascript" src="components/jQuery/jquery.js"></script>
+  <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src='http://rvaviewer-test.appspot.com/gadgets/gadgets.min.js'></script>
+
+  <!--script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/globals.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/base.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/string.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/urlparams.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/config.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/auth.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/auth-init.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/json-native.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/io.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/onload.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/prefs.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/log.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/wpm.transport.js"></script> 
+<script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/rpc.js"></script--> 
+  <script type="text/javascript" src="presentationScripts.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="ctr-main.js"></script>
+</head>
+<body ng-controller="mainController">
+
+<div>
+<label for="widgetUrl">Widget URL: </label>
+  <input type="text" id="widgetUrl" ng-model="widgetUrl" style="width: 800px;"/>
+  <br />
+  <label for="settingsUrl">Settings URL: </label>
+  <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 800px;"/>
+</div>
+
+  <input type="button" value="Settings" ng-click="showWidget(settingsUrl)"/>
+  <input type="button" value="Preview" ng-click="showWidget(widgetUrl)"/>
+
+  <div id="ph1"
+    style="width: 100%; height: 500px; left: 0px; top: 0px; z-index: 1; position: relative;">
+  </div>
+
+  <script>
+
+    function getParam(param, source) {
+      console.log("getParam:" + param + " source:" + source);
+      
+      if (param == "additionalParams") {
+        return "{\"layout-url\":\"\",\"custom-description\":\"\",\"current-temp-font\":\"Verdana\",\"current-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"current-temp-font-url\":\"\",\"current-temp-font-size\":\"60\",\"current-temp-bold\":true,\"current-temp-italic\":false,\"current-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-temp-font\":\"Verdana\",\"forecast-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-temp-font-url\":\"\",\"forecast-temp-font-size\":\"20\",\"forecast-temp-bold\":false,\"forecast-temp-italic\":false,\"forecast-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-day-font\":\"Verdana\",\"forecast-day-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-day-font-url\":\"\",\"forecast-day-font-size\":\"20\",\"forecast-day-bold\":true,\"forecast-day-italic\":false,\"forecast-day-color\":\"rgba(0, 0, 0, 1)\",\"address-font\":\"Verdana\",\"address-font-style\":\"Verdana, Geneva, sans-serif\",\"address-font-url\":\"\",\"address-font-size\":\"24\",\"address-bold\":true,\"address-italic\":false,\"address-color\":\"rgba(0, 0, 0, 1)\",\"humidity-font\":\"Verdana\",\"humidity-font-style\":\"Verdana, Geneva, sans-serif\",\"humidity-font-url\":\"\",\"humidity-font-size\":\"20\",\"humidity-bold\":false,\"humidity-italic\":false,\"humidity-color\":\"rgba(0, 0, 0, 1)\"}";
+      }
+      
+      return "";
+    }
+  </script>
+
+</body>
+</html>
