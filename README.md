@@ -13,4 +13,4 @@ npm run dev-install
 npm run dev #starts the widget dev server at port 8000
 ```
 
-Access [http://localhost:8000](http://localhost:8000) use debug widget.
+Access [http://localhost:8000](http://localhost:8000) to debug widget.
