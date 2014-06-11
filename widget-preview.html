@@ -102,16 +102,6 @@
 		    playCmd(id);
 		}		
 		
-		function getParam(param, source) {
-			console.log("getParam:" + param + " source:" + source);
-			
-			if (param == "additionalParams") {
-				return "{\"layout-url\":\"\",\"custom-description\":\"\",\"current-temp-font\":\"Verdana\",\"current-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"current-temp-font-url\":\"\",\"current-temp-font-size\":\"60\",\"current-temp-bold\":true,\"current-temp-italic\":false,\"current-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-temp-font\":\"Verdana\",\"forecast-temp-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-temp-font-url\":\"\",\"forecast-temp-font-size\":\"20\",\"forecast-temp-bold\":false,\"forecast-temp-italic\":false,\"forecast-temp-color\":\"rgba(0, 0, 0, 1)\",\"forecast-day-font\":\"Verdana\",\"forecast-day-font-style\":\"Verdana, Geneva, sans-serif\",\"forecast-day-font-url\":\"\",\"forecast-day-font-size\":\"20\",\"forecast-day-bold\":true,\"forecast-day-italic\":false,\"forecast-day-color\":\"rgba(0, 0, 0, 1)\",\"address-font\":\"Verdana\",\"address-font-style\":\"Verdana, Geneva, sans-serif\",\"address-font-url\":\"\",\"address-font-size\":\"24\",\"address-bold\":true,\"address-italic\":false,\"address-color\":\"rgba(0, 0, 0, 1)\",\"humidity-font\":\"Verdana\",\"humidity-font-style\":\"Verdana, Geneva, sans-serif\",\"humidity-font-url\":\"\",\"humidity-font-size\":\"20\",\"humidity-bold\":false,\"humidity-italic\":false,\"humidity-color\":\"rgba(0, 0, 0, 1)\"}";
-			}
-			
-			return "";
-		}
-		
 		gadgets.rpc.register('rsmakeRequest_get', function(id, callbackName, url, optParams) {
 			console.log(url);
 // 			url = "weather.xml";

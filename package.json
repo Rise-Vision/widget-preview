@@ -1,11 +1,17 @@
 {
-  "name" : "rv-widget-preview-proxy",
-  "dependencies" : {
-    "express" : "~4.4.1",
-    "request" : "~2.36.0"
+  "name": "rv-widget-preview",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.4.1",
+    "request": "~2.36.0"
   },
-  "scripts" : {
+  "scripts": {
     "dev": "node server.js",
-    "dev-install" : "npm install && bower install"
+    "dev-install": "npm install && bower install"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.0",
+    "gulp-util": "^2.2.16",
+    "node-webkit-builder": "0.0.2"
   }
 }

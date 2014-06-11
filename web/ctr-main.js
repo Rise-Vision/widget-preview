@@ -1,12 +1,13 @@
 angular.module("preview", [])
   .controller("mainController", ["$scope", "$log", "$window", "$rootScope", function ($scope, $log, $window, $rootScope) {
     try{
-      setVisible('ph1', false);
+      setVisible('widget-modal', false);
     } catch (err) {
       $log.error('setVisible call - ph1 - ' + err.message);
     }
 
-    $scope.settingsUrl = "http://s3.amazonaws.com/Widget-World-Clock-Test/settings.html";
+    $scope.settingsUrl = "http://s3.amazonaws.com/Widget-World-Clock/settings.html";
+    $scope.widgetUrl = "http://s3.amazonaws.com/Widget-World-Clock/world-clock.html";
     $scope.params = "";
     $scope.additionalParams = "";
 
@@ -14,8 +15,14 @@ angular.module("preview", [])
       return $scope.additionalParams;
     }
 
-    function closeSettings () {
+    $scope.closeSettings = function () {
       destroyElement("sc0_pre0_ph1", "ph1");
+      setVisible('widget-modal', false);
+      $log.debug("Dialog closed.");
+    }
+
+    $scope.setWidgetFile = function (file) {
+      $log.debug(file.files[0]);
     }
 
     function extractParamsSuffixFromUrl(url) {
@@ -66,7 +73,15 @@ angular.module("preview", [])
       $scope.additionalParams = data.additionalParams;
       $scope.params = extractParamsSuffixFromUrl(data.params);
       $scope.$digest();
-      closeSettings();
+      $scope.closeSettings();
+    }
+
+    function getParams (param, id) {
+      $log.debug("getParams", param, id);
+      if (param === "additionalParams"){
+        return getAdditionalParams();
+      }
+      else return "";
     }
 
     function makeRequestHandler (id, callbackName, url, optParams) {
@@ -78,22 +93,30 @@ angular.module("preview", [])
       }, optParams);
     }
 
+    function itemLoaded (id) {
+      $log.debug("itemLoaded", id);
+    }
+
+    $scope.play = function () {
+      playCmd("sc0_pre0_ph1_0w");
+    }
+
     gadgets.rpc.register('rscmd_getAdditionalParams', getAdditionalParams);
     gadgets.rpc.register('rscmd_saveSettings', saveSettings);
-    gadgets.rpc.register('rscmd_closeSettings', closeSettings);
+    gadgets.rpc.register('rscmd_closeSettings', $scope.closeSettings);
     gadgets.rpc.register('rsmakeRequest_get', makeRequestHandler);
+    gadgets.rpc.register('rsparam_get', getParams);
+    gadgets.rpc.register('rsevent_loaded', itemLoaded);
+    gadgets.rpc.register('rsevent_ready', itemReady);
 
     $scope.showWidget = function (url) {
       $log.info('showing widget');
-      try {
-        updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
-      } catch (err) {
-        $log.error('updateGadgetWrapper call - sc0_pre0_ph1 - '
-            + err.message);
-      }
+
+      updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
 
       try {
-        var widgetUrl =url + $scope.params + ($scope.params.indexOf("?") === -1 ? "?" : "&" )
+        var widgetUrl =url + ($scope.params.indexOf("?") === -1 ?  "?" : "" ) 
+            + $scope.params
             + 'up_id=sc0_pre0_ph1_0w&up_rsW=522&up_rsH=228'
             + '&parent=' + encodeURIComponent($window.location.origin);
         $log.debug('widgetUrl', widgetUrl);
@@ -104,7 +127,7 @@ angular.module("preview", [])
       }
 
       try{
-        setVisible('ph1', true);
+        setVisible('widget-modal', true);
       } catch (err) {
         $log.error('setVisible call - ph1 - ' + err.message);
       }
