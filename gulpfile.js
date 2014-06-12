@@ -11,7 +11,7 @@ gulp.task('build', function (callback) {
         "mode_modules/express/**",
         "node_modules/sockjs/**"
         ],
-      platforms: ['linux32', 'osx']
+      platforms: ['linux32', 'osx', 'win']
     });
 
     // Log stuff you want
