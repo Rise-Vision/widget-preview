@@ -1,25 +1,27 @@
-angular.module("preview")
-  .controller("mainController", ["$scope", "$log", "$window", "$rootScope", "fileWatcher",
-  function ($scope, $log, $window, $rootScope, fileWatcher) {
+angular.module('preview')
+  .controller('dashboardController', ['$scope', '$log', '$window', '$rootScope', 'fileWatcher', 'load',
+  function ($scope, $log, $window, $rootScope, fileWatcher, load) {
     try{
       setVisible('widget-modal', false);
     } catch (err) {
       $log.error('setVisible call - ph1 - ' + err.message);
     }
 
-    $scope.settingsUrl = "http://s3.amazonaws.com/Widget-World-Clock/settings.html";
-    $scope.widgetUrl = "http://s3.amazonaws.com/Widget-World-Clock/world-clock.html";
-    $scope.params = "";
-    $scope.additionalParams = "";
+    console.log('load', load);
+
+    $scope.settingsUrl = 'http://s3.amazonaws.com/Widget-World-Clock/settings.html';
+    $scope.widgetUrl = 'http://s3.amazonaws.com/Widget-World-Clock/world-clock.html';
+    $scope.params = '';
+    $scope.additionalParams = '';
 
     function getAdditionalParams() {
       return $scope.additionalParams;
     }
 
     $scope.closeSettings = function () {
-      destroyElement("sc0_pre0_ph1", "ph1");
+      destroyElement('sc0_pre0_ph1', 'ph1');
       setVisible('widget-modal', false);
-      $log.debug("Dialog closed.");
+      $log.debug('Dialog closed.');
     }
 
     $scope.setWidgetFile = function (file) {
@@ -34,7 +36,7 @@ angular.module("preview")
       if (isValidUrl(url)) {
         var parser = document.createElement('a');
         parser.href = url;
-        $log.debug("params", parser.search);
+        $log.debug('params', parser.search);
         return parser.search;
       }
       else {
@@ -46,12 +48,12 @@ angular.module("preview")
       if (isValidUrl(url)) {
         var parser = document.createElement('a');
         parser.href = url;
-        var fullPath = parser.protocol + "//" + parser.host + parser.pathname;
-        $log.debug("fullPath", fullPath);
+        var fullPath = parser.protocol + '//' + parser.host + parser.pathname;
+        $log.debug('fullPath', fullPath);
         return fullPath;
       }
       else {
-        return "";
+        return '';
       }
     }
 
@@ -70,7 +72,7 @@ angular.module("preview")
     }
 
     function saveSettings (data) {
-      $log.debug("Settings save data", data);
+      $log.debug('Settings save data', data);
       var newWidgetUrl = extractFullPathFromUrl(data.params);
       if(newWidgetUrl) {
         $scope.widgetUrl = newWidgetUrl;
@@ -82,11 +84,11 @@ angular.module("preview")
     }
 
     function getParams (param, id) {
-      $log.debug("getParams", param, id);
-      if (param === "additionalParams"){
+      $log.debug('getParams', param, id);
+      if (param === 'additionalParams'){
         return getAdditionalParams();
       }
-      else return "";
+      else return '';
     }
 
     function makeRequestHandler (id, callbackName, url, optParams) {
@@ -99,11 +101,11 @@ angular.module("preview")
     }
 
     function itemLoaded (id) {
-      $log.debug("itemLoaded", id);
+      $log.debug('itemLoaded', id);
     }
 
     $scope.play = function () {
-      playCmd("sc0_pre0_ph1_0w");
+      playCmd('sc0_pre0_ph1_0w');
     }
 
     gadgets.rpc.register('rscmd_getAdditionalParams', getAdditionalParams);
@@ -120,7 +122,7 @@ angular.module("preview")
       updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
 
       try {
-        var widgetUrl =url + ($scope.params.indexOf("?") === -1 ?  "?" : "" ) 
+        var widgetUrl =url + ($scope.params.indexOf('?') === -1 ?  '?' : '' ) 
             + $scope.params
             + 'up_id=sc0_pre0_ph1_0w&up_rsW=522&up_rsH=228'
             + '&parent=' + encodeURIComponent($window.location.origin);
@@ -137,5 +139,4 @@ angular.module("preview")
         $log.error('setVisible call - ph1 - ' + err.message);
       }
     };
-
   }]);

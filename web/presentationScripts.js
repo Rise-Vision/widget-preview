@@ -177,25 +177,6 @@ function stopCmd(id) {
 //    hideElement(id);
 }
 
-function getParam(param, id) {
-    try { 
-    	var value;
-    	if (typeof(param) == 'string') {
-    		value = getParam(param, id);
-    	}
-    	else if (param.length) {
-    		value = new Array();
-    		for (i = 0; i < param.length; i++) {
-    			value[i] = getParam(param[i], id);
-    		} 
-    	}
-
-    	return value;
-    }
-    catch (err) {
-    	console.log("Gadget " + id + " - rsparam_set - " + err.message);
-    }
-}
 
 (function() {
 //	window.addEventListener("message", receiveMessage, false);

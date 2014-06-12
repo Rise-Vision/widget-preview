@@ -1,0 +1,15 @@
+{
+  "name": "rv-widget-dev-app",
+  "description": "Widget developer app.",
+  "version": "0.1",
+  "main": "web/index.html",
+  "window": {
+    "toolbar": false,
+    "width": 800,
+    "height": 600,
+    "toolbar": true
+  },
+  "dependencies" : {
+    "lodash": "^2.4.1"
+  }
+}
