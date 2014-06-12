@@ -7,16 +7,16 @@
     "dev": "build/rv-widget-dev-app/linux32/nw --remote-debugging-port=9222",
     "dev-install": "npm install && bower install"
   },
-    "window": {
-    "toolbar": false,
+  "window": {
+    "toolbar": true,
     "width": 1024,
-    "height": 768,
-    "toolbar": true
+    "height": 768
   },
-  "dependencies" : {
-    "lodash": "^2.4.1",
+  "dependencies": {
     "express": "~4.4.1",
-    "request": "~2.36.0"
+    "lodash": "^2.4.1",
+    "request": "~2.36.0",
+    "sockjs": "^0.3.9"
   },
   "devDependencies": {
     "gulp": "~3.8.0",

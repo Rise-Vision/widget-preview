@@ -8,7 +8,9 @@ gulp.task('build', function (callback) {
     var nw = new NwBuilder({
       files: ['bootstrapper.html', 'web/**', "server.js", "package.json", 
         "node_modules/request/**",
-        "mode_modules/express/**"],
+        "mode_modules/express/**",
+        "node_modules/sockjs/**"
+        ],
       platforms: ['linux32', 'osx']
     });
 
