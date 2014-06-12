@@ -9,7 +9,6 @@
     "jQuery": "1.10.2",
     "angular-sockjs": "~0.0.1",
     "sockjs": "~0.3.4",
-    "lodash": "~2.4.1",
     "underscore": "~1.6.0"
   }
 }
