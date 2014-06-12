@@ -437,7 +437,8 @@ function updateWidget(url, containerName, htmlName, transition) {
             myContainer.appendChild(myFrame);
             
     	    var myFrameObj = (myFrame.contentWindow) ? myFrame.contentWindow : (myFrame.contentDocument.document) ? myFrame.contentDocument.document : myFrame.contentDocument;
-    	    myFrame.src = url;
+          myFrame.src = url;
+          
  //    	    myFrameObj.location.href = url;
     	    myFrameObj.onload = new function() {
 //        	    parent.itemReady(presFrame, htmlName, false, false, false, false, false);
@@ -829,7 +830,8 @@ function destroyElement(elementName, containerName) {
         }
         
     	setTimeout(function() {
-    		document.getElementById(containerName).removeChild(myElement);
+          document.getElementById(containerName).removeChild(myElement);          
+
     	}, 100);
     	
     }

@@ -1,6 +1,6 @@
 <div>
 <label for="widgetUrl">Widget URL/file: </label>
-  <input type="text" id="widgetUrl" ng-model="widgetUrl" style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
+  <input type="text" id="widgetUrl" ng-model="widgetUrl" ng-model-onblur style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
   <br />
   <label for="settingsUrl">Settings URL/file: </label>
   <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 500px;"/> 

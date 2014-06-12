@@ -1,7 +1,5 @@
-angular.module('preview', ['ngRoute'])
+angular.module('preview', ['ngRoute', 'bd.sockjs'])
   .config(['$routeProvider', function ($routeProvider) {
-    
-
     function loadScript(sScriptSrc, oCallback) {
       var oHead = document.getElementsByTagName('head')[0];
       var oScript = document.createElement('script');
@@ -18,12 +16,27 @@ angular.module('preview', ['ngRoute'])
       oHead.appendChild(oScript);
     }
 
+    var loadScriptDeferred;
+
     $routeProvider
 
     .when('/preview/:view_type', {
       templateUrl: 'viewer/viewer.html',
       controller: 'viewerController', 
       resolve: {
+        socket: function ($q, socketFactory) {
+          var deferred = $q.defer();
+          var socket = socketFactory({
+            url: 'http://localhost:8000/data'
+          });
+          socket.setHandler('open', function () {
+            deferred.resolve(socket);
+          });
+          return deferred.promise;
+        },
+        type: function ($route) {
+          return $route.current.params.view_type;
+        }
       }
     })
 
@@ -32,22 +45,49 @@ angular.module('preview', ['ngRoute'])
       controller: 'dashboardController', 
       resolve: {
         load: function($q, $window, $location) {
-          var deferred = $q.defer();
+          loadScriptDeferred = $q.defer();
           if ($window.location.protocol !== 'file:') {
             $location.path('/no-access');
           } else { // fire $routeChangeError
-
             loadScript('../server.js', function () {
-              deferred.resolve();
-            });  
+              window.onbeforeunload = function(){
+                server.close();
+              };
+              loadScriptDeferred.resolve();
+            });
+            return loadScriptDeferred;
           }
+        },
+        socket: function ($q, socketFactory) {
+          var deferred = $q.defer();
+          
+          loadScriptDeferred.promise.then(function () {
+            var socket = socketFactory({
+              url: 'http://localhost:8000/data'
+            });
+            socket.setHandler('open', function () {
+              deferred.resolve(socket);
+            });
+          });
           return deferred.promise;
         }
       }
     })
 
     .when('/no-access', {
-      templateUrl: 'no-access.html'
+      templateUrl: 'no-access.html',
+      resolve: {
+        socket: function ($q, socketFactory) {
+          var deferred = $q.defer();
+          var socket = socketFactory({
+            url: 'http://localhost:8000/data'
+          });
+          socket.setHandler('open', function () {
+            deferred.resolve(socket);
+          });
+          return deferred.promise;
+        }
+      }
     })
 
   .otherwise({redirectTo: '/'});
@@ -55,10 +95,9 @@ angular.module('preview', ['ngRoute'])
   
   .value('_', function ($window) {
     if($window.location.protocol === 'file:') {
-      return require('./components/lodash/dist/lodash.js');
+      return require('./components/underscore/underscore.js');
     }
     else {
       return $window._;
     }
-  }
-);
+  });
