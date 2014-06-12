@@ -1,13 +1,21 @@
 <div>
+
+  <h4>Specify these values with a remote file (e.g. http://...), or a local file (e.g. file:///home/username/project/my-widget/my-widget.html)</h4>
+
 <label for="widgetUrl">Widget URL/file: </label>
-  <input type="text" id="widgetUrl" ng-model="widgetUrl" ng-model-onblur style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
+  <input type="text" id="widgetUrl" ng-model="widgetUrl" ng-model-onblur style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setFile('widget', this)" ng-disabled="onLocalProxy" />
   <br />
   <label for="settingsUrl">Settings URL/file: </label>
   <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 500px;"/> 
-  <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setSettingsFile(this)" />
-</div>
+  <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setFile('settings', this)" ng-disabled="onLocalProxy" />
 
-  <input type="button" value="Settings" ng-click="showWidget(settingsUrl)"/>
-  <input type="button" value="Preview" ng-click="showWidget(widgetUrl)"/>
-  <div ng-controller="fileWatchController" ng-include="'file-watcher/file-watcher.html'">
-  </div>
+</div>
+<h4>After you are done, copy and paste these values in Chrome browser: </h4>
+  Settings : <input type="text" value="http://localhost:8000/#/preview/settings" style="width: 500px;" readonly/>
+  <br />
+  Widget Preview : <input type="text" value="http://localhost:8000/#/preview/widget" style="width: 500px;" readonly />
+  <br />
+
+  <p>Note: for now you will need to manually refresh browser each time you have made a change. Live reload is coming soon.</p>
+  <!--div ng-controller="fileWatchController" ng-include="'file-watcher/file-watcher.html'">
+  </div-->

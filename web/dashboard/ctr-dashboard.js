@@ -7,8 +7,9 @@ angular.module('preview')
       $log.error('setVisible call - ph1 - ' + err.message);
     }
 
-    console.log('load', load);
-
+    console.log('onLocalProxy', load);
+    $scope.onLocalProxy = load;
+    
     $scope.params = '';
     $scope.additionalParams = '';
 
@@ -27,12 +28,14 @@ angular.module('preview')
       });
     
 
-    $scope.setWidgetFile = function (file) {
-      $log.debug('setWidgetFile returns', file.files[0]);
-      if(file.files[0].path) {
-        $log.debug('Adding file to watch', file.files[0].path);
-        fileWatcher.add(file.files[0].path);
-        $scope.widgetUrl = file.files[0].path;
+    $scope.setFile = function (type, file) {
+      var path = file.files[0].path;
+      $log.debug('set ' + type + ' file returns', path);
+      if(path) {
+        //$log.debug('Adding file to watch', path);
+        //fileWatcher.add(file.files[0].path);
+        $scope[type + 'Url'] = "file://" + path;
+        $scope.$digest();
       }
     }
 
