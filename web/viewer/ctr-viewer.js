@@ -104,7 +104,11 @@ angular.module('preview')
 
 
     $scope.showWidget = function (url) {
-      $log.info('showing widget');
+      $log.info('showing widget', url);
+      $scope.showed = true;
+      if(url.indexOf('file://') === 0) {
+        url = 'http://localhost:8000/local' + url.substring(7);
+      }
 
       updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
       //try {
@@ -152,11 +156,13 @@ angular.module('preview')
         $scope.$watch(name, function (newVal) {
           $log.debug(name, 'changed to ', newVal);
           if(newVal) {
-            socket.send(JSON.stringify({
-              method: 'save',
-              name: name,
-              data: newVal
-            }));
+            if(type === 'settings') {
+             socket.send(JSON.stringify({
+                method: 'save',
+                name: name,
+                data: newVal
+              }));
+            }
           }
         });
       });

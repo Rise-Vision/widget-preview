@@ -1,5 +1,7 @@
+
 var express = require('express');
 var sockjs = require('sockjs');
+var url = require('url');
 
 var app = express(); // better instead
 
@@ -37,8 +39,16 @@ app.get('/gadgets/makeRequest', function (req, res) {
   }
 });
 
-app.use(express.static('/home/ubuntu/rangle.io/risevision/widget-preview/web/'));
 
+app.use('/local', express.static('/'));
+
+app.use(express.static('web/'));
+
+function parseUrl(type) {
+  if(type === 'widgetUrl' || type === 'settingsUrl' && store[type]) {
+    store[type + 'Parsed'] = url.parse(store[type]);
+  }
+}
 
 var data = sockjs.createServer();
 data.on('connection', function(conn) {
@@ -56,6 +66,8 @@ data.on('connection', function(conn) {
     }
     else if (message.method === 'save') {
       store[message.name] = message.data;
+
+      parseUrl(message.name);
 
       for (var i = 0; i < subscribers.length; i++) {
         if(subscribers[i] && subscribers[i] !== conn) {

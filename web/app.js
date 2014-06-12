@@ -47,16 +47,17 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
         load: function($q, $window, $location) {
           loadScriptDeferred = $q.defer();
           if ($window.location.protocol !== 'file:') {
-            $location.path('/no-access');
+            loadScriptDeferred.resolve(true);
+            //$location.path('/no-access');
           } else { // fire $routeChangeError
             loadScript('../server.js', function () {
               window.onbeforeunload = function(){
                 server.close();
               };
-              loadScriptDeferred.resolve();
+              loadScriptDeferred.resolve(false);
             });
-            return loadScriptDeferred;
           }
+          return loadScriptDeferred.promise;
         },
         socket: function ($q, socketFactory) {
           var deferred = $q.defer();
