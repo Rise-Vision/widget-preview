@@ -13,9 +13,8 @@
     "height": 768
   },
   "dependencies": {
-    "express": "~4.4.1",
-    "lodash": "^2.4.1",
-    "request": "~2.36.0",
+    "express": "^4.4.1",
+    "request": "^2.36.0",
     "sockjs": "^0.3.9"
   },
   "devDependencies": {
