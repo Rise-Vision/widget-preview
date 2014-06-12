@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-angular.module("preview")
-  .controller("fileWatchController", ["fileWatcher", "$scope", "$rootScope", "$log", function (fileWatcher, $scope, $rootScope, $log) {
+angular.module('preview')
+  .controller('fileWatchController', ['fileWatcher', '$scope', '$rootScope', '$log', '_', function (fileWatcher, $scope, $rootScope, $log, _) {
     $scope.files = fileWatcher.getFiles();
 
     //manually trigger watch event
@@ -11,8 +11,8 @@ angular.module("preview")
 
     $rootScope.add = function (files) {
       $log.debug(files);
-      if(angular.isArray(files) || files.toString() === "[object FileList]") {
-        fileWatcher.add(_.pluck(files, "path"));
+      if(angular.isArray(files) || files.toString() === '[object FileList]') {
+        fileWatcher.add(_.pluck(files, 'path'));
       }
     };
 

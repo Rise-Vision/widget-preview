@@ -1,0 +1,13 @@
+<div>
+<label for="widgetUrl">Widget URL/file: </label>
+  <input type="text" id="widgetUrl" ng-model="widgetUrl" style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
+  <br />
+  <label for="settingsUrl">Settings URL/file: </label>
+  <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 500px;"/> 
+  <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setSettingsFile(this)" />
+</div>
+
+  <input type="button" value="Settings" ng-click="showWidget(settingsUrl)"/>
+  <input type="button" value="Preview" ng-click="showWidget(widgetUrl)"/>
+  <div ng-controller="fileWatchController" ng-include="'file-watcher/file-watcher.html'">
+  </div>
