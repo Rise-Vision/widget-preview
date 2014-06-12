@@ -1,5 +1,6 @@
-angular.module("preview", [])
-  .controller("mainController", ["$scope", "$log", "$window", "$rootScope", function ($scope, $log, $window, $rootScope) {
+angular.module("preview")
+  .controller("mainController", ["$scope", "$log", "$window", "$rootScope", "fileWatcher",
+  function ($scope, $log, $window, $rootScope, fileWatcher) {
     try{
       setVisible('widget-modal', false);
     } catch (err) {
@@ -22,7 +23,11 @@ angular.module("preview", [])
     }
 
     $scope.setWidgetFile = function (file) {
-      $log.debug(file.files[0]);
+      $log.debug('setWidgetFile returns', file.files[0]);
+      if(file.files[0].path) {
+        $log.debug('Adding file to watch', file.files[0].path);
+        fileWatcher.add(file.files[0].path);
+      }
     }
 
     function extractParamsSuffixFromUrl(url) {

@@ -2,11 +2,33 @@
 <html ng-app="preview">
 <head>
 
+
+   <script type="text/javascript">
+     if(window.location.protocol === "file:") {
+      //node-webkit
+      //dynamically load proxy server logic
+      var _ = require('./components/lodash/dist/lodash.js');
+
+      var head= document.getElementsByTagName('head')[0];
+      var script= document.createElement('script');
+      script.type= 'text/javascript';
+      script.src= '../server.js';
+      head.appendChild(script);
+      require('nw.gui').Window.get().showDevTools();
+
+     }
+     else {
+      //loaded from proxy
+     }
+   </script>
+    
+
   <link href="css/main.css" rel="stylesheet" type="text/css">
 
   <script type="text/javascript" src="components/angular/angular.js"></script>
   <script type="text/javascript" src="components/jQuery/jquery.js"></script>
   <script type="text/javascript" src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script type="text/javascript" src="components/lodash/dist/lodash.underscore.js"></script>
   <script src='http://rvaviewer-test.appspot.com/gadgets/gadgets.min.js'></script>
 
   <!--script type="text/javascript" src="http://viewer-test.appspot.com/gadgets/globals.js"></script> 
@@ -26,15 +48,21 @@
   <script type="text/javascript" src="presentationScripts.js"></script>
   <script type="text/javascript" src="app.js"></script>
   <script type="text/javascript" src="ctr-main.js"></script>
+  <script type="text/javascript" src="file-watcher/svc-file-watcher.js"></script>
+  <script type="text/javascript" src="file-watcher/ctr-file-watch.js"></script>
+
+  <script>
+  </script>
+
 </head>
 <body ng-controller="mainController">
 
 <div>
 <label for="widgetUrl">Widget URL/file: </label>
-  <input type="text" id="widgetUrl" ng-model="widgetUrl" style="width: 600px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
+  <input type="text" id="widgetUrl" ng-model="widgetUrl" style="width: 500px;"/> <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setWidgetFile(this)" />
   <br />
   <label for="settingsUrl">Settings URL/file: </label>
-  <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 600px;"/> 
+  <input type="text" id="settingsUrl" ng-model="settingsUrl" style="width: 500px;"/> 
   <input type="file" ng-model-instant id="fileToUpload" onchange="angular.element(this).scope().setSettingsFile(this)" />
 </div>
 
@@ -51,10 +79,8 @@
     </div>
   </div>
 
-  <script>
-
-
-  </script>
+  <div ng-controller="fileWatchController" ng-include="'file-watcher/file-watcher.html'">
+  </div>
 
 </body>
 </html>

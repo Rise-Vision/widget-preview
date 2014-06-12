@@ -1,0 +1,9 @@
+<h3>Files being watched</h3>
+<div>
+  <label for="add-file-to-watch">Add File(s) to watch</label>
+    <input id="add-file-to-watch" type="file" onchange="angular.element(this).scope().add(this.files)" multiple />
+</div>
+
+<ul ng-repeat="path in files">
+  <li>{{path}}</li>
+</ul>

@@ -1,11 +1,14 @@
 {
   "name": "rv-widget-preview",
   "dependencies": {
-    "angular" : "1.2.16",
+    "angular": "1.2.16",
     "angular-mocks": "1.2.16",
     "angular-resource": "1.2.16",
     "angular-route": "1.2.16",
     "angular-bootstrap": "~0.11.0",
     "jQuery": "1.10.2"
+  },
+  "devDependencies": {
+    "lodash": "~2.4.1"
   }
 }

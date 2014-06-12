@@ -1,5 +1,4 @@
 var express = require('express');
-var request = require('request');
 
 var server = express(); // better instead
 
@@ -29,6 +28,13 @@ server.get('/gadgets/makeRequest', function (req, res) {
 
   }
 });
-server.use(express.static(__dirname + '/web'));
 
+
+
+server.get('/', function (req, res) {
+  res.send('<html><body><ul><li><a href="index.html#/preview/widget">/#/preview/widget</a></li>'+
+    '<li><a href="/index.html#/preview/settings">/#/preview/settings</a></li></ul></body></html>');
+});
+
+server.use(express.static('web/'));
 server.listen(8000);
