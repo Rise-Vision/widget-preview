@@ -10,6 +10,10 @@ var store = {
   additionalParams: ''
 };
 
+var log = function(msg1, msg2, msg3, msg4) {
+  console.log("Server: ", msg1, msg2, msg3, msg4);
+}
+
 var subscribers = [];
 
 app.get('/gadgets/makeRequest', function (req, res) {
@@ -21,9 +25,6 @@ app.get('/gadgets/makeRequest', function (req, res) {
     var responseString = "throw 1; < don't be evil' >";
 
     request(url, function (err, response, body) {
-
-      console.log(response);
-
       var obj = {};
 
       obj[url] = {
@@ -53,34 +54,45 @@ function parseUrl(type) {
 var data = sockjs.createServer();
 data.on('connection', function(conn) {
   subscribers.push(conn);
-  console.log('Connected & subscribed.');
+  log('Connected & subscribed.');
   conn.on('data', function(message) {
     message = JSON.parse(message);
     if(message.method === 'get') {
 
       var numSubscribers = subscribers.length;
+      
       conn.write(JSON.stringify({
         name: message.name,
         data: store[message.name]
       }));
     }
     else if (message.method === 'save') {
-      store[message.name] = message.data;
+      var changed = false;
+
+      if(store[message.name] !== message.data) {
+        //data has actually changed.
+        changed = true;
+        store[message.name] = message.data;
+      }
 
       parseUrl(message.name);
 
-      for (var i = 0; i < subscribers.length; i++) {
-        if(subscribers[i] && subscribers[i] !== conn) {
-          subscribers[i].write(JSON.stringify({
-            name: message.name,
-            data: store[message.name]
-          }));;
-        }
-      };
+      if(changed) {
+        //propagate the change
+        for (var i = 0; i < subscribers.length; i++) {
+          if(subscribers[i] && subscribers[i] !== conn) {
+            subscribers[i].write(JSON.stringify({
+              name: message.name,
+              data: store[message.name]
+            }));;
+          }
+        };  
+      }
+      
     }
   });
   conn.on('close', function() {
-    console.log('Connection closed.');
+    log('Connection closed.');
     var index;
     if((index = subscribers.indexOf(conn)) >= 0) {
       subscribers.splice(index, 1);
