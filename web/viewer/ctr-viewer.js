@@ -17,12 +17,16 @@ angular.module('preview')
      });
 
     function getAdditionalParams() {
+      $log.debug('getAdditionalParams called', $scope.additionalParams);
       return $scope.additionalParams;
     }
 
-    function getParams (param, id) {
-      $log.debug('getParams', param, id);
-      if (param === 'additionalParams'){
+    function getParams (id, paramName) {
+      if(!paramName) {
+        paramName = id;
+      }
+      $log.debug('getParams called', paramName, id);
+      if (paramName === 'additionalParams'){
         return getAdditionalParams();
       }
       else {
@@ -75,6 +79,11 @@ angular.module('preview')
       var newWidgetUrl = extractFullPathFromUrl(data.params);
       if(newWidgetUrl) {
         $scope.widgetUrl = newWidgetUrl;
+        socket.send(JSON.stringify({
+          method: 'save',
+          name: 'widgetUrl',
+          data: $scope.widgetUrl
+        }));
       }
       $scope.additionalParams = data.additionalParams;
       $scope.params = extractParamsSuffixFromUrl(data.params);
@@ -86,12 +95,6 @@ angular.module('preview')
     function itemLoaded (id) {
       $log.debug('itemLoaded', id);
     }
-
-    gadgets.rpc.register('rscmd_saveSettings', saveSettings);
-    gadgets.rpc.register('rscmd_getAdditionalParams', getAdditionalParams);
-    gadgets.rpc.register('rsevent_loaded', itemLoaded);
-    gadgets.rpc.register('rsevent_ready', itemReady);
-    gadgets.rpc.register('rsparam_get', getParams);
 
     $scope.closeSettings = function () {
       try {
@@ -167,10 +170,15 @@ angular.module('preview')
         });
       });
     
+    gadgets.rpc.register('rscmd_saveSettings', saveSettings);
+    gadgets.rpc.register('rscmd_getAdditionalParams', getAdditionalParams);
+    gadgets.rpc.register('rsevent_loaded', itemLoaded);
+    gadgets.rpc.register('rsevent_ready', itemReady);
+    gadgets.rpc.register('rsparam_get', getParams);
+    gadgets.rpc.register('rscmd_closeSettings', $scope.closeSettings);
 
-
-   socket.send(JSON.stringify({method: 'get', name: 'params'}));
-   socket.send(JSON.stringify({method: 'get', name: 'additionalParams'}));
-   socket.send(JSON.stringify({method: 'get', name: type + 'Url'}));
+     socket.send(JSON.stringify({method: 'get', name: 'params'}));
+     socket.send(JSON.stringify({method: 'get', name: 'additionalParams'}));
+     socket.send(JSON.stringify({method: 'get', name: type + 'Url'}));
 
   }]);
