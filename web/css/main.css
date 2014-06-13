@@ -19,3 +19,8 @@
 .dropbox.over {
     background-color: #bfb;
 }
+
+textarea {
+  width: 100%;
+  height: 130px;
+}

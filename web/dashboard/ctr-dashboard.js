@@ -6,14 +6,20 @@ angular.module('preview')
     } catch (err) {
       $log.error('setVisible call - ph1 - ' + err.message);
     }
+    
+   socket.setHandler('message', function (event) {
+    var data = JSON.parse(event.data);
+    $log.debug('event.data', data);
+    $scope[data.name] = data.data;
+   });
 
     console.log('onLocalProxy', load);
     $scope.onLocalProxy = load;
     
     $scope.params = '';
-    $scope.additionalParams = '';
+    $scope.additionalParams = '{}';
 
-    angular.forEach(['settingsUrl', 'widgetUrl'],
+    angular.forEach(['settingsUrl', 'widgetUrl', 'params', 'additionalParams'],
       function (name) {
         $scope.$watch(name, function (newVal) {
           $log.debug(name, 'changed to ', newVal);
@@ -48,11 +54,10 @@ angular.module('preview')
       }, optParams);
     }
 
-    gadgets.rpc.register('rscmd_closeSettings', $scope.closeSettings);
     gadgets.rpc.register('rsmakeRequest_get', makeRequestHandler);
 
 
-    $scope.settingsUrl = 'http://s3.amazonaws.com/Widget-World-Clock/settings.html';
-    $scope.widgetUrl = 'http://s3.amazonaws.com/Widget-World-Clock/world-clock.html';
+    $scope.settingsUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/settings.html';
+    $scope.widgetUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/current.html';
 
   }]);
