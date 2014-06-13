@@ -57,7 +57,7 @@ angular.module('preview')
     gadgets.rpc.register('rsmakeRequest_get', makeRequestHandler);
 
 
-    $scope.settingsUrl = 'http://s3.amazonaws.com/Widget-World-Clock/settings.html';
-    $scope.widgetUrl = 'http://s3.amazonaws.com/Widget-World-Clock/world-clock.html';
+    $scope.settingsUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/settings.html';
+    $scope.widgetUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/current.html';
 
   }]);

@@ -56,14 +56,6 @@ function itemLoaded(id) {
     }
 }
 
-function itemReady(id, canPlay, canStop, canPause, canReportReady, canReportDone) {
-	$(document).stopTime("t" + id);
-
-	parent.itemReady(presFrame, id, canPlay, canStop, canPause, canReportReady, canReportDone);
-	
-    triggerEvent("gadgetReady", id);
-}
-
 function itemError(id, reason) {
 	parent.itemError(presFrame, id, reason);
 }
@@ -208,7 +200,6 @@ function stopCmd(id) {
 		gadgets.rpc.register('rsevent_done', itemDone);
     gadgets.rpc.register('rsparam_get', function(id, param) {
 		   	var value = getParam(param, id);
-
 		   	gadgets.rpc.call('if_' + id, 'rsparam_set_' + id, null, param, value);
 		});
     

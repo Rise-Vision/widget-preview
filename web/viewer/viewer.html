@@ -1,8 +1,9 @@
 <div id="widget-modal" style="width: 100%; height: 100%; left: 0px; top: 0px; z-index: 1; position: fixed; background-color: white;">
   <div id="controls">
   Showing {{url}}
-  <button ng-click="play()">Play</button>
-  <button ng-click="closeSettings()">Close</button>
+  <button ng-click="play()" ng-show="canPlay">Play</button>
+  <button ng-click="pause()" ng-show="canPause">Pause</button>
+  <button ng-click="stop()" ng-show="canStop">Stop</button>
   </div>
   <div id="ph1"
     style="width: 100%; height: 100%;">

@@ -2,6 +2,7 @@
 var express = require('express');
 var sockjs = require('sockjs');
 var url = require('url');
+var request = require('request');
 
 var app = express(); // better instead
 
@@ -43,7 +44,7 @@ app.get('/gadgets/makeRequest', function (req, res) {
 
 app.use('/local', express.static('/'));
 
-app.use(express.static('web/'));
+app.use('/', express.static('web/'));
 
 function parseUrl(type) {
   if(type === 'widgetUrl' || type === 'settingsUrl' && store[type]) {
