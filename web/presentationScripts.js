@@ -195,8 +195,8 @@ function stopCmd(id) {
 //	}
 	
 	try {
-		gadgets.rpc.register('rsevent_loaded', itemLoaded);
-		gadgets.rpc.register('rsevent_ready', itemReady);
+		//gadgets.rpc.register('rsevent_loaded', itemLoaded);
+		//gadgets.rpc.register('rsevent_ready', itemReady);
 		gadgets.rpc.register('rsevent_done', itemDone);
     gadgets.rpc.register('rsparam_get', function(id, param) {
 		   	var value = getParam(param, id);
