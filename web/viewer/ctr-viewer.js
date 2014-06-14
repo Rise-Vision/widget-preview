@@ -121,7 +121,7 @@ angular.module('preview')
       $log.info('showing widget', url);
       $scope.showed = true;
       if(url.indexOf('file://') === 0) {
-        url = 'http://localhost:8000/local' + url.substring(7);
+        url = 'http://localhost:8000/local/' + url.substring(7);
       }
 
       updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');

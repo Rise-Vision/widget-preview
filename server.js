@@ -41,8 +41,10 @@ app.get('/gadgets/makeRequest', function (req, res) {
   }
 });
 
-
-app.use('/local', express.static('/'));
+app.use('/local/*', function (req, res) {
+  var path = req.params[0];
+  res.sendfile(path);
+});
 
 app.use('/', express.static('web/'));
 
