@@ -8,7 +8,7 @@
     "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install && gulp build"
   },
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 1024,
     "height": 768
   },
