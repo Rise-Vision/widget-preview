@@ -24,12 +24,13 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
       templateUrl: 'viewer/viewer.html',
       controller: 'viewerController', 
       resolve: {
-        socket: function ($q, socketFactory) {
+        socket: function ($q, socketFactory, $log) {
           var deferred = $q.defer();
           var socket = socketFactory({
             url: 'http://localhost:8000/data'
           });
           socket.setHandler('open', function () {
+            $log.debug('Websocket connection opened.');
             deferred.resolve(socket);
           });
           return deferred.promise;
@@ -44,7 +45,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
       templateUrl: 'dashboard/dashboard.html',
       controller: 'dashboardController', 
       resolve: {
-        load: function($q, $window, $location) {
+        load: function($q, $window) {
           loadScriptDeferred = $q.defer();
           if ($window.location.protocol !== 'file:') {
             loadScriptDeferred.resolve(true);
@@ -59,7 +60,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
           }
           return loadScriptDeferred.promise;
         },
-        socket: function ($q, socketFactory) {
+        socket: function ($q, socketFactory, $log) {
           var deferred = $q.defer();
           
           loadScriptDeferred.promise.then(function () {
@@ -67,6 +68,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
               url: 'http://localhost:8000/data'
             });
             socket.setHandler('open', function () {
+              $log.debug('Websocket connection opened.');
               deferred.resolve(socket);
             });
           });
@@ -76,19 +78,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
     })
 
     .when('/no-access', {
-      templateUrl: 'no-access.html',
-      resolve: {
-        socket: function ($q, socketFactory) {
-          var deferred = $q.defer();
-          var socket = socketFactory({
-            url: 'http://localhost:8000/data'
-          });
-          socket.setHandler('open', function () {
-            deferred.resolve(socket);
-          });
-          return deferred.promise;
-        }
-      }
+      templateUrl: 'no-access.html'
     })
 
   .otherwise({redirectTo: '/'});
