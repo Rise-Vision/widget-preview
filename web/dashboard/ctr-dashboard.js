@@ -57,7 +57,11 @@ angular.module('preview')
     gadgets.rpc.register('rsmakeRequest_get', makeRequestHandler);
 
 
-    $scope.settingsUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/settings.html';
-    $scope.widgetUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/current.html';
+    //$scope.settingsUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/settings.html';
+    //$scope.widgetUrl = 'file:///home/ubuntu/rangle.io/risevision/widget-weather/current.html';
+
+    $scope.settingsUrl = '';
+    $scope.widgetUrl = '';
+
 
   }]);
