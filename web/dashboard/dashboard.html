@@ -20,10 +20,13 @@
   <!--div ng-controller="fileWatchController" ng-include="'file-watcher/file-watcher.html'">
   </div-->
 <div>
-  <h5>Params</h5>
+  <h4 class="inline">Params</h4>
+  <button ng-click="params = ''">Reset</button>
   <textarea ng-model="params"></textarea>
 </div>
 <div>
-  <h5>additional Params</h5>
+  <h4 class="inline" ng-click="additionalParams=''">
+  <button ng-click="additionalParams = ''">Reset</button>
+  Additional Params</h4>
   <textarea ng-model="additionalParams"></textarea>
 </div>

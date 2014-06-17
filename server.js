@@ -75,6 +75,7 @@ data.on('connection', function(conn) {
       if(store[message.name] !== message.data) {
         //data has actually changed.
         changed = true;
+        console.log("Saving", message.name, message.data);
         store[message.name] = message.data;
       }
 
