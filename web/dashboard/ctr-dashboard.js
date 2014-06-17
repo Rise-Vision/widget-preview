@@ -17,7 +17,7 @@ angular.module('preview')
     $scope.onLocalProxy = load;
     
     $scope.params = '';
-    $scope.additionalParams = '{}';
+    $scope.additionalParams = '';
 
     angular.forEach(['settingsUrl', 'widgetUrl', 'params', 'additionalParams'],
       function (name) {
