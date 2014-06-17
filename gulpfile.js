@@ -11,10 +11,7 @@ gulp.task('build', function (callback) {
         "node_modules/express/**",
         "node_modules/sockjs/**"
         ],
-      platforms: ['linux32', 'osx', 'win'],
-      macZip: true,
-      macIcns: 'assets/rv.icns',
-      winIco: 'assets/rv.ico'
+      platforms: ['linux32', 'osx', 'win']
     });
 
     // Log stuff you want

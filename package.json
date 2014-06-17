@@ -1,11 +1,12 @@
 {
   "name": "rv-widget-dev-app",
   "description": "Widget developer app.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "web/index.html",
   "scripts": {
     "dev": "build/rv-widget-dev-app/linux32/nw --remote-debugging-port=9222",
-    "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install && gulp build"
+    "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install",
+    "build": "gulp build"
   },
   "window": {
     "toolbar": false,
