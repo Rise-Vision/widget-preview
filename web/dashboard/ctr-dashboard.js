@@ -23,13 +23,11 @@ angular.module('preview')
       function (name) {
         $scope.$watch(name, function (newVal) {
           $log.debug(name, 'changed to ', newVal);
-          if(newVal) {
-            socket.send(JSON.stringify({
-              method: 'save',
-              name: name,
-              data: newVal
-            }));
-          }
+          socket.send(JSON.stringify({
+            method: 'save',
+            name: name,
+            data: newVal
+          }));
         });
       });
     
