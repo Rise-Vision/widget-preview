@@ -3,13 +3,17 @@
   "description": "Widget developer app.",
   "version": "0.1.1",
   "main": "web/index.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Rise-Vision/widget-preview"
+  },
   "scripts": {
     "dev": "build/rv-widget-dev-app/linux32/nw --remote-debugging-port=9222",
     "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install",
-    "build": "gulp build"
+    "build": "rm -rf build && gulp build"
   },
   "window": {
-    "toolbar": false,
+    "toolbar": true,
     "width": 1024,
     "height": 768
   },
