@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "build/rv-widget-dev-app/linux32/nw --remote-debugging-port=9222",
     "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install",
-    "build": "rm -rf build && gulp build"
+    "build": "gulp build",
+    "version": "node ./get-npm-version.js"
   },
   "window": {
     "toolbar": true,
@@ -21,9 +22,10 @@
     "express": "~4.4.1",
     "gulp": "~3.8.0",
     "gulp-bump": "~0.1.8",
+    "gulp-clean": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-run": "~1.5.2",
-    "gulp-util": "~2.2.16",
+    "gulp-util": "^2.2.17",
     "node-webkit-builder": "0.0.2",
     "request": "~2.36.0",
     "sockjs": "^0.3.9"

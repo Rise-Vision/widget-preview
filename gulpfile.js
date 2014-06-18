@@ -8,6 +8,9 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bump = require('gulp-bump');
 var rename = require('gulp-rename');
+var clean = require('gulp-clean');
+var gutil = require('gulp-util');
+var fs = require('fs');
 
 gulp.task('config', function() {
   gulp.src(['./web/config/' + env + '.js'])
@@ -15,7 +18,22 @@ gulp.task('config', function() {
     .pipe(gulp.dest('./web/config'));
 });
 
-gulp.task('build', ['config'], function (callback) {
+gulp.task('clean', function() {
+  return gulp.src('build/**/*', {read: false})
+    .pipe(clean({force: true}));
+});
+
+gulp.task('save-version', function () {
+  var json = require('./package.json');
+  if(!json.version) {
+    throw 'No version specified in package.json';
+  }
+  else {
+    fs.writeFileSync('build/VERSION', json.version);
+  }
+});
+
+gulp.task('build', ['config', 'clean', 'save-version'], function (callback) {
 
     var nw = new NwBuilder({
       files: ['web/**', 'server.js', 'package.json',
@@ -36,6 +54,7 @@ gulp.task('build', ['config'], function (callback) {
       if(err) {
           gutil.log('node-webkit-builder', err);
       }
+
       callback();
       gutil.beep();
     });
