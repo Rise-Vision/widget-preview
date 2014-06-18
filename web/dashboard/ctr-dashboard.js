@@ -6,16 +6,16 @@ angular.module('preview')
     } catch (err) {
       $log.error('setVisible call - ph1 - ' + err.message);
     }
-    
+
    socket.setHandler('message', function (event) {
     var data = JSON.parse(event.data);
     $log.debug('event.data', data);
     $scope[data.name] = data.data;
    });
 
-    console.log('onLocalProxy', load);
+    $log.debug('onLocalProxy', load);
     $scope.onLocalProxy = load;
-    
+
     $scope.params = '';
     $scope.additionalParams = '';
 
