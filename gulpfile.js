@@ -1,6 +1,7 @@
 var NwBuilder = require('node-webkit-builder');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var bump = require('gulp-bump');
 
 gulp.task('build', function (callback) {
 
@@ -26,6 +27,14 @@ gulp.task('build', function (callback) {
       callback();
       gutil.beep();
     });
+});
+
+// Defined method of updating:
+// Semantic
+gulp.task('bump', function(){
+  gulp.src(['./package.json', './bower.json'])
+  .pipe(bump({type:'patch'}))
+  .pipe(gulp.dest('./'));
 });
 
 gulp.task('default', ['build']);
