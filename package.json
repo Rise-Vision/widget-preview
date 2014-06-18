@@ -14,15 +14,14 @@
     "height": 768
   },
   "dependencies": {
-    "express": "^4.4.1",
-    "request": "^2.36.0",
-    "sockjs": "^0.3.9"
-  },
-  "devDependencies": {
+    "express": "~4.4.1",
     "gulp": "~3.8.0",
-    "gulp-bump": "^0.1.8",
-    "gulp-run": "^1.5.2",
-    "gulp-util": "^2.2.16",
-    "node-webkit-builder": "0.0.2"
+    "gulp-bump": "~0.1.8",
+    "gulp-rename": "^1.2.0",
+    "gulp-run": "~1.5.2",
+    "gulp-util": "~2.2.16",
+    "node-webkit-builder": "0.0.2",
+    "request": "~2.36.0",
+    "sockjs": "^0.3.9"
   }
 }

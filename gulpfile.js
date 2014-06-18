@@ -1,9 +1,21 @@
+'use strict';
+
+/*jshint node: true */
+
+var env = process.env.NODE_ENV || 'dev';
 var NwBuilder = require('node-webkit-builder');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bump = require('gulp-bump');
+var rename = require('gulp-rename');
 
-gulp.task('build', function (callback) {
+gulp.task('config', function() {
+  gulp.src(['./web/config/' + env + '.js'])
+    .pipe(rename('config.js'))
+    .pipe(gulp.dest('./web/config'));
+});
+
+gulp.task('build', ['config'], function (callback) {
 
     var nw = new NwBuilder({
       files: ['web/**', 'server.js', 'package.json',
