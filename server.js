@@ -12,25 +12,25 @@ var store = {
 };
 
 var log = function(msg1, msg2, msg3, msg4) {
-  console.log("Server: ", msg1, msg2, msg3, msg4);
-}
+  console.log('Server: ', msg1, msg2, msg3, msg4);
+};
 
 var subscribers = [];
 
 app.get('/gadgets/makeRequest', function (req, res) {
   if (!req.query.url) {
-    res.send(400, "URL parameter is requried");
+    res.send(400, 'URL parameter is requried');
   }
   else {
     var url = req.query.url;
-    var responseString = "throw 1; < don't be evil' >";
+    var responseString = 'throw 1; < don\'t be evil\' >';
 
-    request(url, function (err, response, body) {
+    request(url, function (err, response) {
       var obj = {};
 
       obj[url] = {
         body: response.body,
-        DataHash: "",
+        DataHash: '',
         rc: response.statusCode
       };
 
@@ -62,8 +62,6 @@ data.on('connection', function(conn) {
     message = JSON.parse(message);
     if(message.method === 'get') {
 
-      var numSubscribers = subscribers.length;
-      
       conn.write(JSON.stringify({
         name: message.name,
         data: store[message.name]
@@ -75,7 +73,7 @@ data.on('connection', function(conn) {
       if(store[message.name] !== message.data) {
         //data has actually changed.
         changed = true;
-        console.log("Saving", message.name, message.data);
+        console.log('Saving', message.name, message.data);
         store[message.name] = message.data;
       }
 
@@ -88,11 +86,11 @@ data.on('connection', function(conn) {
             subscribers[i].write(JSON.stringify({
               name: message.name,
               data: store[message.name]
-            }));;
+            }));
           }
-        };  
+        }
       }
-      
+
     }
   });
   conn.on('close', function() {

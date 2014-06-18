@@ -1,15 +1,14 @@
 var NwBuilder = require('node-webkit-builder');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var run = require('gulp-run');
 
 gulp.task('build', function (callback) {
 
     var nw = new NwBuilder({
-      files: ['bootstrapper.html', 'web/**', "server.js", "package.json", 
-        "node_modules/request/**",
-        "node_modules/express/**",
-        "node_modules/sockjs/**"
+      files: ['web/**', 'server.js', 'package.json',
+        'node_modules/request/**',
+        'node_modules/express/**',
+        'node_modules/sockjs/**'
         ],
       platforms: ['linux32', 'osx', 'win']
     });
