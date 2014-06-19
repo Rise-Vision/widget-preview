@@ -15,7 +15,7 @@ var fs = require('fs');
 console.log('Environment is', env);
 
 gulp.task('config', function() {
-  gulp.src(['./web/config/' + env + '.js'])
+  return gulp.src(['./web/config/' + env + '.js'])
     .pipe(rename('config.js'))
     .pipe(gulp.dest('./web/config'));
 });
@@ -52,7 +52,7 @@ gulp.task('build', ['config', 'clean', 'save-version'], function (callback) {
     });
 
     // Build retruns a promise
-    nw.build(function (err) {
+    return nw.build(function (err) {
       if(err) {
           gutil.log('node-webkit-builder', err);
       }
@@ -65,7 +65,7 @@ gulp.task('build', ['config', 'clean', 'save-version'], function (callback) {
 // Defined method of updating:
 // Semantic
 gulp.task('bump', function(){
-  gulp.src(['./package.json', './bower.json'])
+  return gulp.src(['./package.json', './bower.json'])
   .pipe(bump({type:'patch'}))
   .pipe(gulp.dest('./'));
 });
