@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev": "build/rv-widget-dev-app/linux32/nw --remote-debugging-port=9222",
-    "dev-install": "rm -rf node_modules && rm -rf web/components && npm install && bower install",
-    "build": "mkdir build || true && gulp build",
+    "dev-install": "rm -rf node_modules ; rm -rf web/components ; npm install ; bower install",
+    "build": "mkdir build || true ; gulp build",
     "version": "node ./get-npm-version.js"
   },
   "window": {
