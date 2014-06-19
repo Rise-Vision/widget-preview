@@ -1,3 +1,5 @@
+/* global server: false */
+
 angular.module('preview', ['ngRoute', 'bd.sockjs'])
   .config(['$routeProvider', function ($routeProvider) {
     function loadScript(sScriptSrc, oCallback) {
@@ -22,7 +24,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
 
     .when('/preview/:view_type', {
       templateUrl: 'viewer/viewer.html',
-      controller: 'viewerController', 
+      controller: 'viewerController',
       resolve: {
         socket: function ($q, socketFactory, $log) {
           var deferred = $q.defer();
@@ -43,7 +45,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
 
     .when('/', {
       templateUrl: 'dashboard/dashboard.html',
-      controller: 'dashboardController', 
+      controller: 'dashboardController',
       resolve: {
         load: function($q, $window) {
           loadScriptDeferred = $q.defer();
@@ -62,7 +64,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
         },
         socket: function ($q, socketFactory, $log) {
           var deferred = $q.defer();
-          
+
           loadScriptDeferred.promise.then(function () {
             var socket = socketFactory({
               url: 'http://localhost:8000/data'
@@ -83,7 +85,7 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
 
   .otherwise({redirectTo: '/'});
 }])
-  
+
   .value('_', function ($window) {
     if($window.location.protocol === 'file:') {
       return require('./components/underscore/underscore.js');
