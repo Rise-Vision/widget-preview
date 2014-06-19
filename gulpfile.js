@@ -12,6 +12,8 @@ var clean = require('gulp-clean');
 var gutil = require('gulp-util');
 var fs = require('fs');
 
+console.log('Environment is', env);
+
 gulp.task('config', function() {
   gulp.src(['./web/config/' + env + '.js'])
     .pipe(rename('config.js'))
