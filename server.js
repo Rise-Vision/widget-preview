@@ -49,7 +49,8 @@ app.use('/local/*', function (req, res) {
 app.use('/', express.static('web/'));
 
 function parseUrl(type) {
-  if(type === 'widgetUrl' || type === 'settingsUrl' && store[type]) {
+  if((type === 'widgetUrl' || type === 'settingsUrl') && store[type]) {
+    console.log('store', store);
     store[type + 'Parsed'] = url.parse(store[type]);
   }
 }
