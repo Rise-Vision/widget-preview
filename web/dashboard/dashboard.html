@@ -16,10 +16,12 @@
 <h4>After you are done, copy and paste these values in Chrome browser: </h4>
   Settings :
   <input type="text" value="http://localhost:8000/#/preview/settings" style="width: 500px;" readonly ng-show="!onLocalProxy"/>
+  <button ng-show="!onLocalProxy" ng-click="openBrowser('http://localhost:8000/#/preview/settings');">Open in Browser</button>
   <a ng-show="onLocalProxy" href="/#/preview/settings">Open Settings UI</a>
   <br />
   Widget Preview :
   <input type="text" value="http://localhost:8000/#/preview/widget" style="width: 500px;" readonly ng-show="!onLocalProxy"/>
+  <button ng-show="!onLocalProxy" ng-click="openBrowser('http://localhost:8000/#/preview/widget');">Open in Browser</button>
   <a ng-show="onLocalProxy" href="/#/preview/widget">Open Widget</a>
   <br />
 

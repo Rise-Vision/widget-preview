@@ -41,7 +41,8 @@ gulp.task('build', ['config', 'clean', 'save-version'], function (callback) {
       files: ['web/**', 'server.js', 'package.json',
         'node_modules/request/**',
         'node_modules/express/**',
-        'node_modules/sockjs/**'
+        'node_modules/sockjs/**',
+        'node_modules/open/**'
         ],
       platforms: ['linux32', 'osx', 'win']
     });

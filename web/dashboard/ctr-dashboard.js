@@ -19,6 +19,10 @@ angular.module('preview')
     $scope.params = '';
     $scope.additionalParams = '';
 
+    $scope.openBrowser = function (url) {
+      require('open')(url);
+    };
+
     angular.forEach(['settingsUrl', 'widgetUrl', 'params', 'additionalParams'],
       function (name) {
         $scope.$watch(name, function (newVal) {
@@ -30,7 +34,7 @@ angular.module('preview')
           }));
         });
       });
-    
+
 
     $scope.setFile = function (type, file) {
       var path = file.files[0].path;
@@ -44,11 +48,11 @@ angular.module('preview')
     }
 
     function makeRequestHandler (id, callbackName, url, optParams) {
-      $log.debug('rsmakeRequest_get url', url);      
+      $log.debug('rsmakeRequest_get url', url);
       gadgets.io.makeRequest(url, function(data) {
         data['data'] = null;
-        
-        gadgets.rpc.call('if_' + id, callbackName, null, data);       
+
+        gadgets.rpc.call('if_' + id, callbackName, null, data);
       }, optParams);
     }
 
