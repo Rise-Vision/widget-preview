@@ -10,8 +10,9 @@ Rapid Widget Development App (RWDA) is a widget development utility that enables
 
 RWDA is currently available for Windows, Mac OS X and Linux. 
 
-## Download*
+## Download
 The latest versions can be downloaded via one of these addresses:
+http://192.254.220.36/~rvi/widget-preview/
 
 * Windows (32 bit): 
 * Mac OS X: 

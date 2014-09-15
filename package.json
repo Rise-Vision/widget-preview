@@ -26,7 +26,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-run": "~1.5.2",
     "gulp-util": "^2.2.17",
-    "node-webkit-builder": "git://github.com/mllrsohn/node-webkit-builder#19240c997528f3215d53cad8cc8e833f93cb480a",
+    "node-webkit-builder": "git://github.com/mllrsohn/node-webkit-builder.git",
     "open": "0.0.5",
     "request": "~2.36.0",
     "sockjs": "^0.3.9"
