@@ -198,9 +198,18 @@ function stopCmd(id) {
 		//gadgets.rpc.register('rsevent_loaded', itemLoaded);
 		//gadgets.rpc.register('rsevent_ready', itemReady);
 		gadgets.rpc.register('rsevent_done', itemDone);
-    gadgets.rpc.register('rsparam_get', function(id, param) {
-		   	var value = getParam(param, id);
-		   	gadgets.rpc.call('if_' + id, 'rsparam_set_' + id, null, param, value);
+    gadgets.rpc.register('rsparam_get', function(id, param) {      
+      var value;
+    	if (typeof(param) == 'string') {
+    		value = getParam(param, id);
+    	}
+    	else if (param.length) {
+    		value = new Array();
+    		for (i = 0; i < param.length; i++) {
+    			value[i] = getParam(param[i], id);
+    		} 
+    	}
+	   	gadgets.rpc.call('if_' + id, 'rsparam_set_' + id, null, param, value);
 		});
     
 //		gadgets.rpc.register('rsmakeRequest_get', function(id, callbackName, url, optParams) {

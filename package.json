@@ -1,7 +1,7 @@
 {
   "name": "rv-widget-dev-app",
   "description": "Widget developer app.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "web/index.html",
   "repository": {
     "type": "git",
