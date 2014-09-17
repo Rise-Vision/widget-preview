@@ -208,7 +208,7 @@ angular.module('preview')
         for (i = 0; i < param.length; i++) {
           value[i] = getParam(param[i], id);
         } 
-      });
+      }
       gadgets.rpc.call('if_' + id, 'rsparam_set_' + id, null, param, value);
     });
 
