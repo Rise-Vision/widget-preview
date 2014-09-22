@@ -128,7 +128,9 @@ angular.module('preview')
       //try {
         var widgetUrl = url + ($scope.params.indexOf('?') === -1 ?  '?' : '' ) +
             $scope.params + ($scope.params.length === 0 ?  '?' : '&' ) + 
-            'up_id=sc0_pre0_ph1_0w&up_rsW=522&up_rsH=228' +
+            'up_id=sc0_pre0_ph1_0w&' + 
+            'up_rsW=' + document.getElementById('sc0_pre0_ph1').offsetWidth + '&' +
+            'up_rsH=' + document.getElementById('sc0_pre0_ph1').offsetHeight + '&' +
             '&parent=' + encodeURIComponent($window.location.origin);
         $log.debug('URL', widgetUrl);
         updateWidget(
