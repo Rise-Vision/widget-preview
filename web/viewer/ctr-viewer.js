@@ -106,6 +106,12 @@ angular.module('preview')
 
       $scope.play();
     }
+    
+    function itemDone(id) {
+      $log.debug('itemDone', id);
+      
+      $scope.play();
+    }
 
     $scope.closeSettings = function () {
       try {
@@ -200,6 +206,7 @@ angular.module('preview')
     gadgets.rpc.register('rscmd_getAdditionalParams', getAdditionalParams);
     gadgets.rpc.register('rsevent_loaded', itemLoaded);
     gadgets.rpc.register('rsevent_ready', itemReady);
+    gadgets.rpc.register('rsevent_done', itemDone);
     gadgets.rpc.register('rsparam_get', function(id, param) {
       var value;
       if (typeof(param) == 'string') {

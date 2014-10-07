@@ -1,6 +1,6 @@
 {
   "name": "rv-widget-dev-app",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "dependencies": {
     "angular": "1.2.16",
     "angular-mocks": "1.2.16",
