@@ -132,8 +132,8 @@ angular.module('preview')
 
       updateGadgetWrapper('ph1', 'sc0_pre0_ph1', 0, 0, 'none');
       //try {
-        var widgetUrl = url + ($scope.params.indexOf('?') === -1 ?  '?' : '' ) +
-            $scope.params + ($scope.params.length === 0 ?  '?' : '&' ) + 
+        var widgetUrl = url + 
+            ($scope.params.length === 0 ? '?' : ($scope.params.indexOf('?') === -1 ? '?' : '') + $scope.params + '&') +
             'up_id=sc0_pre0_ph1_0w&' + 
             'up_rsW=' + document.getElementById('sc0_pre0_ph1').offsetWidth + '&' +
             'up_rsH=' + document.getElementById('sc0_pre0_ph1').offsetHeight + '&' +
