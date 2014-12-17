@@ -1,0 +1,14 @@
+dependencies:
+  pre:
+    - npm install -g gulp
+  post:
+    - bower install
+deployment:
+  staging:
+    branch: /(feature|fix|chore).*/
+    commands:
+      - NODE_ENV=test npm run build
+  production:
+    branch: master
+    commands:
+      - NODE_ENV=prod npm run build
