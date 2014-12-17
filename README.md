@@ -1,4 +1,4 @@
-# Rapid Widget Development App (RWDA)  [![Build Status](http://devtools1.risevision.com:8080/job/Widget-Preview-Master-Prod/badge/icon)](http://devtools1.risevision.com:8080/job/Widget-Preview-Master-Prod/)
+# Rapid Widget Development App (RWDA)  [![Circle CI](https://circleci.com/gh/Rise-Vision/widget-preview/tree/master.svg?style=svg)](https://circleci.com/gh/Rise-Vision/widget-preview/tree/master)
 
 ## Introduction
 Rapid Widget Development App (RWDA) is a widget development utility that enables developers and enthusiasts to develop their own custom Rise Vision widgets from a personal computer.

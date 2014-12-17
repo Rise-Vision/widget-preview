@@ -9,8 +9,7 @@
   },
   "scripts": {
     "dev": "sh ./run-widget-preview.sh",
-    "dev-install": "rm -rf node_modules ; rm -rf web/components ; npm install ; bower install",
-    "build": "mkdir build || true ; gulp build",
+    "build": "gulp build",
     "version": "node ./get-npm-version.js"
   },
   "window": {
