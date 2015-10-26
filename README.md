@@ -12,9 +12,12 @@ At this time Chrome is the only browser that this project and Rise Vision suppor
 ## Download
 The latest platform specific versions can be downloaded via one of the following links:
 
-- [Windows (32 bit)](http://s3.amazonaws.com/widget-preview-dl/0.1.7/widget-preview-win.zip) 
-- [Mac OSX](http://s3.amazonaws.com/widget-preview-dl/0.1.7/widget-preview-osx.zip) 
-- [Linux](http://s3.amazonaws.com/widget-preview-dl/0.1.7/widget-preview-linux32.zip)
+- [Windows (32 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-win32.zip) 
+- [Windows (64 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-win64.zip) 
+- [Mac OSX (32 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-osx32.zip) 
+- [Mac OSX (64 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-osx64.zip) 
+- [Linux (32 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-linux32.zip)
+- [Linux (64 bit)](http://s3.amazonaws.com/widget-preview-dl/0.2.0/widget-preview-linux64.zip)
 
 ### Installation
 Unzip the package and run the executable named **rv-widget-dev-app** (paths to the executable will differ upon platform). 
