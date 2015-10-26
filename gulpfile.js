@@ -27,10 +27,7 @@ gulp.task('build', ['config', 'clean'], function (callback) {
 
     var nw = new NwBuilder({
       files: ['web/**', 'server.js', 'package.json',
-        'node_modules/request/**',
-        'node_modules/express/**',
-        'node_modules/sockjs/**',
-        'node_modules/open/**'
+        'node_modules/**'
         ],
       platforms: ['linux', 'osx', 'win'],
       version: '0.12.2' // override version so it stops trying to download the latest - https://goo.gl/MX7Lu2
