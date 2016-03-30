@@ -3,8 +3,15 @@ var express = require('express');
 var sockjs = require('sockjs');
 var url = require('url');
 var request = require('request');
+var chokidar = require('chokidar');
+
 
 var app = express(); // better instead
+
+
+var watcher = chokidar.watch('', {
+  persistent: true
+});
 
 var store = {
   params: '',
@@ -48,17 +55,42 @@ app.use('/local/*', function (req, res) {
 
 app.use('/', express.static('web/'));
 
+function watchFiles(name, conn) {
+  if(name === "watchFiles"  && store[name]){
+    var files = store[name];
+    console.log('files', files);
+    for(var i = 0; i<= files.length; i++){
+      watcher.add(files[i]);
+    }
+  }
+}
+
 function parseUrl(type) {
-  if((type === 'widgetUrl' || type === 'settingsUrl') && store[type]) {
+  if ((type === 'widgetUrl' || type === 'settingsUrl') && store[type]) {
     console.log('store', store);
     store[type + 'Parsed'] = url.parse(store[type]);
   }
+}
+
+function triggerReload(path, conn) {
+  console.log('File '+path+' has been changed')
+  conn.write(JSON.stringify({
+    name: 'reload',
+    data: ''
+  }));
 }
 
 var data = sockjs.createServer();
 data.on('connection', function(conn) {
   subscribers.push(conn);
   log('Connected & subscribed.');
+  watcher
+    .on('add', function(path) {
+      triggerReload(path, conn);
+    })
+    .on('change', function(path) {
+      triggerReload(path, conn);
+    });
   conn.on('data', function(message) {
     message = JSON.parse(message);
     if(message.method === 'get') {
@@ -78,6 +110,7 @@ data.on('connection', function(conn) {
         store[message.name] = message.data;
       }
 
+      watchFiles(message.name, conn);
       parseUrl(message.name);
 
       if(changed) {

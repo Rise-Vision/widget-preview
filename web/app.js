@@ -1,6 +1,6 @@
 /* global server: false */
 
-angular.module('preview', ['ngRoute', 'bd.sockjs'])
+angular.module('preview', ['ngRoute', 'bd.sockjs', 'underscore'])
   .config(['$routeProvider', function ($routeProvider) {
     function loadScript(sScriptSrc, oCallback) {
       var oHead = document.getElementsByTagName('head')[0];
@@ -84,13 +84,14 @@ angular.module('preview', ['ngRoute', 'bd.sockjs'])
     })
 
   .otherwise({redirectTo: '/'});
-}])
+}]);
 
-  .value('_', function ($window) {
-    if($window.location.protocol === 'file:') {
-      return require('./components/underscore/underscore.js');
-    }
-    else {
-      return $window._;
-    }
-  });
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function($window) {
+  if($window.location.protocol === 'file:') {
+    return require('./components/underscore/underscore.js');
+  }
+  else {
+    return $window._;
+  }
+}]);

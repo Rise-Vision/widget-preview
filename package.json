@@ -1,7 +1,7 @@
 {
   "name": "rv-widget-dev-app",
   "description": "Widget developer app.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "web/index.html",
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "open": "0.0.5",
     "request": "~2.36.0",
     "sockjs": "^0.3.9",
-    "run-sequence": "^0.3.2"
+    "run-sequence": "^0.3.2",
+    "chokidar": "1.4.3"
   }
 }
