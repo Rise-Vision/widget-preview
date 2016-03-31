@@ -1,5 +1,5 @@
 angular.module('preview')
-  .controller('viewerController', ['socket', '$scope', '$log', 'type', '$window', function (socket, $scope, $log, type, $window) {
+  .controller('viewerController', ['socket', '$scope', '$log', 'type', '$window', '$route', function (socket, $scope, $log, type, $window, $route) {
 
     $scope.params = '';
     $scope.additionalParams = '';
@@ -9,6 +9,9 @@ angular.module('preview')
       var data = JSON.parse(event.data);
       $log.debug('event.data', data);
       $scope[data.name] = data.data;
+      if(data.name === 'reload'){
+        $route.reload();
+      }
      });
 
      $scope.$on('$destroy', function () {

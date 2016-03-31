@@ -66,4 +66,23 @@ angular.module('preview')
     $scope.widgetUrl = '';
 
 
+    $scope.files = fileWatcher.getFiles();
+
+    //manually trigger watch event
+    $rootScope.$on('watch.file.changed', function () {
+      $scope.$digest();
+      socket.send(JSON.stringify({
+        method: 'save',
+        name: 'watchFiles',
+        data: $scope.files
+      }));
+    });
+
+    $rootScope.add = function (files) {
+      $log.debug(files);
+      if(angular.isArray(files) || files.toString() === '[object FileList]') {
+        fileWatcher.add(_.pluck(files, 'path'));
+      }
+    };
+
   }]);
